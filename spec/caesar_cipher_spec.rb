@@ -26,4 +26,8 @@ describe '#caesar_cipher' do
   it 'returns string shifted 3 characters to the right and wraps around the alphabet if necessary' do
     expect(caesar_cipher('zyZY', 3)).to eql('cbCB')
   end
+
+  it 'returns string shifted 30 characters to the right and wraps around the alphabet if necessary' do
+    expect(caesar_cipher('I have 23 CATS!!', 30)).to eql('M lezi 23 GEXW!!')
+  end
 end
