@@ -1,30 +1,24 @@
-require 'pry-byebug'
-# binding.pry
-
-def wrap(c, shift_factor)
-  if (c + shift_factor) > 122
-    c = ((c + shift_factor) - 122) + 96
-  else
-    c + shift_factor
-  end
-end
+# frozen_string_literal: true
 
 def shift(arr, shift_factor)
-  arr.map do |c|
-    if c.between?(97, 122)
-      wrap(c, shift_factor).chr
+  arr.map do |value|
+    if value.between?(97, 122) && (value + shift_factor) > 122
+      (((value + shift_factor) - 122) + 96).chr
+    elsif value.between?(65, 90) && (value + shift_factor) > 90
+      (((value + shift_factor) - 122) + 96).chr
     else
-      c.chr
+      (value + shift_factor).chr
     end
   end
 end
 
 def caesar_cipher(string, shift_factor)
-  p shift(string.downcase.unpack('U*'), shift_factor).join.capitalize
+  result = shift(string.unpack('U*'), shift_factor).join
+  # result.capitalize if string == string.capitalize
 end
 
-print "What message do you want to encode?\n"
-string = gets.chomp
-print "How many factors do you want to shift your message by?\n"
-shift_factor = gets.chomp.to_i
-caesar_cipher(string, shift_factor)
+# print "What message do you want to encode?\n"
+# string = gets.chomp
+# print "How many factors do you want to shift your message by?\n"
+# shift_factor = gets.chomp.to_i
+# caesar_cipher(string, shift_factor)
